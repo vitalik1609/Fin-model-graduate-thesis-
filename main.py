@@ -56,9 +56,13 @@ class OIL():
         return ndpi
 
     def NPV(self, rate, value):
-        '''расчет NPV'''
+        '''расчет NPV (Наша собственная функция)'''
         '''Принимает ставку дисконтирования rate и денежные потоки списком value'''
-        return np.npv(rate, value)
+        NPV = 0
+        for t in range(len(value)):
+            NPV += value[t]/(1+rate)**t
+        return NPV
+
 
     def drawCharts(self):
         '''выводит график NPV и FCF от времени'''
@@ -194,6 +198,8 @@ print('-'*200)
 print('NPV(задаем ставку дисконтирования и денежные потоки):', N1.NPV(rate, value))
 print('-'*200)
 print('FCF1(Задаем кэш от операций, учитываются НДПИ и кап затраты на трубы и скважины):', N1.FCF1())
+print('-'*200)
+print('FCF2(Задаем кэш от операций, учитываются НДПИ и кап затраты на трубы и скважины):', N1.FCF2())
 print('-'*200)
 print('CapEx: ', N1.getCapEx())
 N1.drawCharts()
